@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+            list-style: none;
+        }
+        body{
+            background-color: rgb(190, 255, 255);
+            display: grid;
+            place-items: center;
+        }
+        main{
+            display: grid;
+            /* place-items: center; */
+            width: 80%;
+            place-items: center;
+        }
+
+        input{
+            width: 500px;
+            height: 50px;
+            border-radius: 50px;
+            border: 1px solid rgba(0,0,0,0.5);
+            padding: 20px;
+            font-size: 16px;
+            font-family: cambria;
+            align-self: center;
+        }
+        main form {
+            width: 100%;
+            align-items: center;
+            /* background-color: blue; */
+            justify-content: center;
+            text-align: center;
+            margin: 25px;
+        }
+        ul {
+            /* margin: 20px 0; */
+            /* background-color: blue; */
+            /* padding: 0 20px; */
+            width: 500px;
+            align-items: center;
+        }
+        ul li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            /* width: 800px; */
+            margin: 20px 0 ;
+            border: .1px solid rgba(0,0,0,0.4);
+        }
+       
+        ul li img{
+            width: 50px;
+            aspect-ratio: 1/1;
+        }
+        ul li button{
+            background: green;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 300ms ease;
+        }
+        ul li button:hover{
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        
+        <form action="">
+            <h1>Books Store</h1>
+            <input type="search" class="input">
+        </form>
+
+        <ul>
+            <li>
+                <img src="drake.jpg" alt="">
+                <h3>Explicit Biology</h3>
+                <a href="bear.jpg" download><button>Download</button></a>
+            </li>
+            <li>
+                <img src="bear.jpg" alt="">
+                <h3>Lamlard Chemistry</h3>
+                <button>Download</button>
+            </li>
+        </ul>
+    </main>
+
+    <script>
+
+        const listItem = document.querySelector("main ul"); 
+        const form = document.querySelector("form");
+
+
+        form.addEventListener("keyup", (e) => {
+            e.preventDefault(); 
+            const SearchBox = form.querySelector("input[type='search']")
+            const booklist = listItem.querySelectorAll("li h3"); 
+
+            const inputValue = SearchBox.value.toLowerCase()
+
+            booklist.forEach(book => {
+                let bookname = book.innerHTML.toLowerCase();
+
+                if(bookname.indexOf(inputValue) === -1){
+                    book.parentElement.style.display = "none"
+                }else{
+                    book.parentElement.style.display = "flex"
+                }
+            })
+            
+        })
+        
+
+    
+        
+        const booksArray = [
+            {
+                name: "Jamb remix Biology",
+                picture: "drake.jpg"
+            },
+            {
+                name: "Understanding Chemistry",
+                picture: "bear.jpg"
+            },
+            {
+                name: "Lamlard Chemistry",
+                picture: "drake.jpg"
+            },
+            {
+                name: "Jamb remix English",
+                picture: "drake.jpg"
+            },
+            {
+                name: "Introduction to Latex",
+                picture: "drake.jpg"
+            },
+        ]; 
+
+        const HTMLbook = []
+        
+        const renderBooks = () => {
+            for(let i = 0; i < booksArray.length; i++){
+                let book = `
+                <li>
+                    <img src="${booksArray[i].picture}" alt="">
+                    <h3>${booksArray[i].name}</h3>
+                    <a href="jamb series remix physics.pdf" download><button>Download</button></a>
+                </li>`
+
+                HTMLbook.push(book)
+
+            }
+        }
+
+        renderBooks()
+        let result = HTMLbook.join("")
+        listItem.innerHTML = result
+        
+        
+    </script>
+</body>
+</html>
